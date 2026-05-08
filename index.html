@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>프로젝트별 업무 일정 관리</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container-fluid py-4 app-shell">
+    <h1 class="mb-4">프로젝트별 업무 일정 관리</h1>
+
+    <ul class="nav nav-tabs mb-4" id="topMenu">
+      <li class="nav-item">
+        <button class="nav-link active" data-view="taskView">Task Register</button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" data-view="timelineView">Timeline</button>
+      </li>
+    </ul>
+
+    <section class="card-dark mb-4">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label">Project Name</label>
+          <div class="d-flex gap-2">
+            <input id="projectNameInput" type="text" class="form-control" placeholder="프로젝트명을 입력하세요" />
+            <button id="addProjectBtn" class="btn btn-primary">Add Project</button>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Filter by Project</label>
+          <select id="projectFilter" class="form-select">
+            <option value="all">All Projects</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <section id="taskView">
+      <div class="card-dark mb-4">
+        <h5 class="mb-3">업무 등록</h5>
+        <form id="taskForm" class="row g-3">
+          <div class="col-md-4">
+            <label class="form-label">Project *</label>
+            <select id="taskProject" class="form-select" required>
+              <option value="">Select project</option>
+            </select>
+          </div>
+          <div class="col-md-8">
+            <label class="form-label">Task Name *</label>
+            <input id="taskName" type="text" class="form-control" required />
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Start Date *</label>
+            <input id="startDate" type="date" class="form-control" required />
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Target Date *</label>
+            <input id="targetDate" type="date" class="form-control" required />
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Completed Date</label>
+            <input id="completedDate" type="date" class="form-control" />
+          </div>
+          <div class="col-md-12">
+            <label class="form-label">Memo / Issues</label>
+            <textarea id="memo" class="form-control" rows="2"></textarea>
+          </div>
+          <div class="col-12">
+            <button id="submitTaskBtn" type="submit" class="btn btn-success">Add Task</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="card-dark">
+        <h5 class="mb-3">Task List</h5>
+        <div class="table-responsive">
+          <table class="table table-dark table-bordered align-middle text-center" id="taskTable">
+            <thead>
+              <tr>
+                <th>Project</th>
+                <th>Task Name</th>
+                <th>Start Date</th>
+                <th>Target Date</th>
+                <th>Completed Date</th>
+                <th>Status</th>
+                <th>Memo</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="taskTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="timelineView" class="d-none">
+      <div class="card-dark mb-3 d-flex justify-content-between align-items-center flex-wrap gap-2">
+        <button id="prevMonthBtn" class="btn btn-outline-light btn-sm">Prev</button>
+        <h5 id="currentMonthLabel" class="mb-0"></h5>
+        <button id="nextMonthBtn" class="btn btn-outline-light btn-sm">Next</button>
+      </div>
+      <div class="card-dark timeline-scroll-wrap">
+        <div class="timeline-grid" id="timelineGrid"></div>
+      </div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
